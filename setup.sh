@@ -1,6 +1,11 @@
 # pyenv
-curl https://pyenv.run | bash
-exec $SHELL
+apt-get install build-essential -y
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+
+source ~/.bashrc
 pyenv install -v 3.8.6
 
 # add pyenv to load path, adjust for zsh
@@ -19,7 +24,7 @@ sudo apt-get install \
     ca-certificates \
     curl \
     gnupg-agent \
-    software-properties-common
+    software-properties-common -y
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -28,11 +33,11 @@ sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
-   stable"
+   stable" -y
 
 # install docker engine
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y 
 
 # verify build
 sudo docker run hello-world
